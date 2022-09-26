@@ -63,11 +63,11 @@ public class GatewayFlowRuleController {
     private SentinelApiClient sentinelApiClient;
 
     @Autowired
-    @Qualifier("gateWayFlowRulesNacosProvider")
+    @Qualifier("gatewayFlowRuleNacosProvider")
     private DynamicRuleProvider<List<GatewayFlowRuleEntity>> ruleProvider;
 
     @Autowired
-    @Qualifier("gateWayFlowRulesNacosPublisher")
+    @Qualifier("gatewayFlowRuleNacosPublisher")
     private DynamicRulePublisher<List<GatewayFlowRuleEntity>> rulePublisher;
 
     @GetMapping("/list.json")

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alibaba.csp.sentinel.dashboard.rule.nacos;
+package com.alibaba.csp.sentinel.dashboard.config;
 
 import com.alibaba.boot.nacos.config.properties.NacosConfigProperties;
 import com.alibaba.boot.nacos.config.util.NacosPropertiesBuilder;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.gateway.ApiDefinitionEntity;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.gateway.GatewayFlowRuleEntity;
-import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.FlowRuleEntity;
+import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.*;
 import com.alibaba.csp.sentinel.datasource.Converter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.api.config.ConfigFactory;
@@ -54,28 +54,46 @@ public class NacosConfig {
         return s -> JSON.parseArray(s, FlowRuleEntity.class);
     }
 
-    /**
-     * 网关API
-     *
-     * @return
-     * @throws Exception
-     */
     @Bean
-    public Converter<List<ApiDefinitionEntity>, String> apiDefinitionEntityEncoder() {
+    public Converter<List<DegradeRuleEntity>, String> degradeRuleEntityEncoder() {
         return source -> JSON.toJSONString(source, true);
     }
 
     @Bean
-    public Converter<String, List<ApiDefinitionEntity>> apiDefinitionEntityDecoder() {
-        return s -> JSON.parseArray(s, ApiDefinitionEntity.class);
+    public Converter<String, List<DegradeRuleEntity>> degradeRuleEntityDecoder() {
+        return s -> JSON.parseArray(s, DegradeRuleEntity.class);
     }
 
-    /**
-     * 网关flowRule
-     *
-     * @return
-     * @throws Exception
-     */
+    @Bean
+    public Converter<List<SystemRuleEntity>, String> systemRuleEntityEncoder() {
+        return source -> JSON.toJSONString(source, true);
+    }
+
+    @Bean
+    public Converter<String, List<SystemRuleEntity>> systemRuleEntityDecoder() {
+        return s -> JSON.parseArray(s, SystemRuleEntity.class);
+    }
+
+    @Bean
+    public Converter<List<AuthorityRuleEntity>, String> authorityRuleEntityEncoder() {
+        return source -> JSON.toJSONString(source, true);
+    }
+
+    @Bean
+    public Converter<String, List<AuthorityRuleEntity>> authorityRuleEntityDecoder() {
+        return s -> JSON.parseArray(s, AuthorityRuleEntity.class);
+    }
+
+    @Bean
+    public Converter<List<ParamFlowRuleEntity>, String> paramFlowRuleEntityEncoder() {
+        return source -> JSON.toJSONString(source, true);
+    }
+
+    @Bean
+    public Converter<String, List<ParamFlowRuleEntity>> paramFlowRuleEntityDecoder() {
+        return s -> JSON.parseArray(s, ParamFlowRuleEntity.class);
+    }
+
     @Bean
     public Converter<List<GatewayFlowRuleEntity>, String> gatewayFlowRuleEntityEncoder() {
         return source -> JSON.toJSONString(source, true);
@@ -84,6 +102,16 @@ public class NacosConfig {
     @Bean
     public Converter<String, List<GatewayFlowRuleEntity>> gatewayFlowRuleEntityDecoder() {
         return s -> JSON.parseArray(s, GatewayFlowRuleEntity.class);
+    }
+
+    @Bean
+    public Converter<List<ApiDefinitionEntity>, String> apiDefinitionRuleEntityEncoder() {
+        return source -> JSON.toJSONString(source, true);
+    }
+
+    @Bean
+    public Converter<String, List<ApiDefinitionEntity>> apiDefinitionRuleEntityDecoder() {
+        return s -> JSON.parseArray(s, ApiDefinitionEntity.class);
     }
 
     @Bean

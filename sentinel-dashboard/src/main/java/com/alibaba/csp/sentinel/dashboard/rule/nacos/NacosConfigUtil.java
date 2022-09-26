@@ -22,13 +22,18 @@ package com.alibaba.csp.sentinel.dashboard.rule.nacos;
 public final class NacosConfigUtil {
 
     public static final String GROUP_ID = "SENTINEL_GROUP";
-    
-    public static final String FLOW_DATA_ID_POSTFIX = "-flow-rules";
-    public static final String PARAM_FLOW_DATA_ID_POSTFIX = "-param-rules";
-    public static final String CLUSTER_MAP_DATA_ID_POSTFIX = "-cluster-map";
 
-    public static final String GETWAY_FLOW_DATA_ID_POSTFIX = "-sentinel-gateway-flow-rules";
-    public static final String GETWAY_API_DATA_ID_POSTFIX = "-sentinel-gateway-api-rules";
+    // 保存到nacos中的文件后缀
+    public static final String FLOW_DATA_ID_POSTFIX = "-flow-rules";
+    public static final String DEGRADE_DATA_ID_POSTFIX = "-degrade-rules";
+    public static final String SYSTEM_DATA_ID_POSTFIX = "-system-rules";
+    public static final String AUTHORITY_DATA_ID_POSTFIX = "-authority-rules";
+    public static final String PARAM_FLOW_DATA_ID_POSTFIX = "-param-flow-rules";
+    public static final String GATEWAY_FLOW_DATA_ID_POSTFIX = "-gw-flow-rules";
+    public static final String GATEWAY_API_FLOW_DATA_ID_POSTFIX = "-gw-api-group-rules";
+
+    //public static final String PARAM_FLOW_DATA_ID_POSTFIX = "-param-rules";
+    public static final String CLUSTER_MAP_DATA_ID_POSTFIX = "-cluster-map";
 
     /**
      * cc for `cluster-client`

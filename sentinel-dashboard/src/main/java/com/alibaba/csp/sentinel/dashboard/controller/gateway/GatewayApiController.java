@@ -60,11 +60,11 @@ public class GatewayApiController {
     private SentinelApiClient sentinelApiClient;
 
     @Autowired
-    @Qualifier("gateWayApiNacosProvider")
+    @Qualifier("apiDefinitionNacosProvider")
     private DynamicRuleProvider<List<ApiDefinitionEntity>> ruleProvider;
 
     @Autowired
-    @Qualifier("gateWayApiNacosPublisher")
+    @Qualifier("apiDefinitionNacosPublisher")
     private DynamicRulePublisher<List<ApiDefinitionEntity>> rulePublisher;
 
 
