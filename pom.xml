@@ -219,6 +219,11 @@
                 <version>${powermock.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit-dep</artifactId>
+                <version>4.9</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

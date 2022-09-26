@@ -16,9 +16,10 @@
 package com.alibaba.csp.sentinel.dashboard;
 
 import com.alibaba.csp.sentinel.init.InitExecutor;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.time.LocalDateTime;
 
 /**
  * Sentinel dashboard application.
@@ -29,6 +30,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DashboardApplication {
 
     public static void main(String[] args) {
+        System.setProperty("nacos.discovery.register.metadata.preserved.register.time", LocalDateTime.now().toString());
+
         triggerSentinelInit();
         SpringApplication.run(DashboardApplication.class, args);
     }
