@@ -15,6 +15,7 @@
     <properties>
         <resource.delimiter>@</resource.delimiter>
         <spring.boot.version>2.5.12</spring.boot.version>
+        <nacos.boot.version>0.2.8.1</nacos.boot.version>
         <curator.version>4.0.1</curator.version>
     </properties>
 
@@ -114,11 +115,23 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+        <!--guava-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>30.1-jre</version>
+        </dependency>
         <!--使用nacos注册中心-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-discovery-spring-boot-starter</artifactId>
-            <version>0.2.8</version>
+            <version>${nacos.boot.version}</version>
+        </dependency>
+        <!--使用nacos配置中心-->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>${nacos.boot.version}</version>
         </dependency>
         <!-- for Nacos rule publisher sample -->
         <dependency>
