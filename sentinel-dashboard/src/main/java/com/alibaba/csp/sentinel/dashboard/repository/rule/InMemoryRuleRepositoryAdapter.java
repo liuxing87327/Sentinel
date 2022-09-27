@@ -15,19 +15,24 @@
  */
 package com.alibaba.csp.sentinel.dashboard.repository.rule;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.RuleEntity;
 import com.alibaba.csp.sentinel.dashboard.discovery.MachineInfo;
 import com.alibaba.csp.sentinel.util.AssertUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author leyou
  */
 public abstract class InMemoryRuleRepositoryAdapter<T extends RuleEntity> implements RuleRepository<T, Long> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InMemoryRuleRepositoryAdapter.class);
 
     /**
      * {@code <machine, <id, rule>>}
@@ -48,10 +53,10 @@ public abstract class InMemoryRuleRepositoryAdapter<T extends RuleEntity> implem
         if (processedEntity != null) {
             allRules.put(processedEntity.getId(), processedEntity);
             machineRules.computeIfAbsent(MachineInfo.of(processedEntity.getApp(), processedEntity.getIp(),
-                processedEntity.getPort()), e -> new ConcurrentHashMap<>(32))
-                .put(processedEntity.getId(), processedEntity);
+                    processedEntity.getPort()), e -> new ConcurrentHashMap<>(32))
+                    .put(processedEntity.getId(), processedEntity);
             appRules.computeIfAbsent(processedEntity.getApp(), v -> new ConcurrentHashMap<>(32))
-                .put(processedEntity.getId(), processedEntity);
+                    .put(processedEntity.getId(), processedEntity);
         }
 
         return processedEntity;
@@ -67,6 +72,13 @@ public abstract class InMemoryRuleRepositoryAdapter<T extends RuleEntity> implem
         if (rules == null) {
             return null;
         }
+
+        long lastId = rules.stream().map(T::getId).filter(Objects::nonNull).max(Long::compare).orElse(0L);
+        if (!Objects.equals(lastId(), lastId)) {
+            LOGGER.info("内存记录递增ID变更，重置最大值");
+            lastId(lastId);
+        }
+
         List<T> savedRules = new ArrayList<>(rules.size());
         for (T rule : rules) {
             savedRules.add(save(rule));
@@ -126,4 +138,19 @@ public abstract class InMemoryRuleRepositoryAdapter<T extends RuleEntity> implem
      * @return next unused id
      */
     abstract protected long nextId();
+
+    /**
+     * Get last id.
+     *
+     * @return last id
+     */
+    abstract protected long lastId();
+
+    /**
+     * Set last id.
+     *
+     * @param lastId
+     */
+    abstract protected void lastId(long lastId);
+
 }

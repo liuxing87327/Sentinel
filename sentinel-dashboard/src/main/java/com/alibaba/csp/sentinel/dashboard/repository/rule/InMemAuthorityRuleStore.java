@@ -15,11 +15,10 @@
  */
 package com.alibaba.csp.sentinel.dashboard.repository.rule;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.AuthorityRuleEntity;
-
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * In-memory storage for authority rules.
@@ -36,4 +35,15 @@ public class InMemAuthorityRuleStore extends InMemoryRuleRepositoryAdapter<Autho
     protected long nextId() {
         return ids.incrementAndGet();
     }
+
+    @Override
+    protected long lastId() {
+        return ids.get();
+    }
+
+    @Override
+    protected void lastId(long lastId) {
+        ids.set(lastId);
+    }
+
 }
