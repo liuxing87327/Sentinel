@@ -272,6 +272,6 @@ public class FlowNacosControllerV1 {
         List<FlowRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app, ip, port));
         // return sentinelApiClient.setFlowRuleOfMachineAsync(app, ip, port, rules);
         rulePublisher.publish(app, rules);
-        return null;
+        return CompletableFuture.completedFuture(null);
     }
 }
