@@ -55,19 +55,16 @@ public class GatewayApiNacosController {
 
     @Autowired
     private InMemApiDefinitionStore repository;
-
     @Autowired
     private SentinelApiClient sentinelApiClient;
 
     @Autowired
     @Qualifier("apiDefinitionNacosProvider")
     private DynamicRuleProvider<List<ApiDefinitionEntity>> ruleProvider;
-
     @Autowired
     @Qualifier("apiDefinitionNacosPublisher")
     private DynamicRulePublisher<List<ApiDefinitionEntity>> rulePublisher;
-
-
+    
     @GetMapping("/list.json")
     @AuthAction(AuthService.PrivilegeType.READ_RULE)
     public Result<List<ApiDefinitionEntity>> queryApis(String app, String ip, Integer port) {

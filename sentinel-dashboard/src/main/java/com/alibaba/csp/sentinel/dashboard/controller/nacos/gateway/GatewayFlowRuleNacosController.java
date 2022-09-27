@@ -58,14 +58,12 @@ public class GatewayFlowRuleNacosController {
 
     @Autowired
     private InMemGatewayFlowRuleStore repository;
-
     @Autowired
     private SentinelApiClient sentinelApiClient;
 
     @Autowired
     @Qualifier("gatewayFlowRuleNacosProvider")
     private DynamicRuleProvider<List<GatewayFlowRuleEntity>> ruleProvider;
-
     @Autowired
     @Qualifier("gatewayFlowRuleNacosPublisher")
     private DynamicRulePublisher<List<GatewayFlowRuleEntity>> rulePublisher;

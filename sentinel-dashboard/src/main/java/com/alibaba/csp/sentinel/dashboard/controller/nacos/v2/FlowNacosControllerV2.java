@@ -126,11 +126,11 @@ public class FlowNacosControllerV2 {
     @PostMapping("/rule")
     @AuthAction(value = PrivilegeType.WRITE_RULE)
     public Result<FlowRuleEntity> apiAddFlowRule(@RequestBody FlowRuleEntity entity) {
-
         Result<FlowRuleEntity> checkResult = checkEntityInternal(entity);
         if (checkResult != null) {
             return checkResult;
         }
+
         entity.setId(null);
         Date date = new Date();
         entity.setGmtCreate(date);
