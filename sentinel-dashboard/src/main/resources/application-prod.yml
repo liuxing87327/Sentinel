@@ -6,12 +6,26 @@ server:
       io: 4
       worker: 32
 
+#nacos 配置
 nacos:
+  config:
+    auto-refresh: true
+    bootstrap:
+      enable: true
+      log-enable: true
+    server-addr: "192.168.1.253:8848"
+    group: DEFAULT_GROUP
+    data-id: sentinel-dashboard.yaml
+    type: yaml
+    username: nacos
+    password: nacos
   discovery:
     register:
-      ip: ''
-    server-addr: ''
+#      ip: "192.168.52.6"
+    server-addr: "192.168.1.253:8848"
 
+#auth settings
+# If auth.enabled=false, Sentinel console disable login
 auth:
   password: sentinel
   username: sentinel
