@@ -1,0 +1,17 @@
+server:
+  undertow:
+    accesslog:
+      dir: /app/logs/sentinel-dashboard/access_log/
+    threads:
+      io: 4
+      worker: 32
+
+nacos:
+  discovery:
+    register:
+      ip: ''
+    server-addr: ''
+
+auth:
+  password: sentinel
+  username: sentinel

@@ -1,0 +1,32 @@
+#spring settings
+server:
+  undertow:
+    accesslog:
+      dir: ./logs/sentinel-dashboard/access_log/
+    threads:
+      io: 4
+      worker: 32
+
+#nacos 配置
+nacos:
+  config:
+    auto-refresh: true
+    bootstrap:
+      enable: true
+      log-enable: true
+    server-addr: ''
+    group: DEFAULT_GROUP
+    data-id: sentinel-dashboard.yaml
+    type: yaml
+    username: nacos
+    password: nacos
+  discovery:
+    register:
+      ip: ''
+    server-addr: ''
+
+#auth settings
+# If auth.enabled=false, Sentinel console disable login
+auth:
+  password: sentinel
+  username: sentinel
