@@ -102,6 +102,7 @@ public class ParamFlowRuleNacosController {
             //     .thenApply(Result::ofSuccess)
             //     .get();
             List<ParamFlowRuleEntity> rules = ruleProvider.getRules(app);
+            rules = repository.saveAll(rules);
             return Result.ofSuccess(rules);
         } catch (ExecutionException ex) {
             logger.error("Error when querying parameter flow rules", ex.getCause());
