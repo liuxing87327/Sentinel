@@ -30,6 +30,9 @@
             <thead>
               <tr style="background: #F3F5F7;">
                 <td>
+                  ID
+                </td>
+                <td>
                   API 名称
                 </td>
                 <td>
@@ -42,14 +45,17 @@
                   单机阈值
                 </td>
                 <td>
+                  间隔
+                </td>
+                <td>
                   操作
                 </td>
               </tr>
             </thead>
-
             <tbody>
               <tr dir-paginate="rule in rules | filter: searchKey | itemsPerPage: rulesPageConfig.pageSize " current-page="rulesPageConfig.currentPageIndex"
                   pagination-id="entriesPagination">
+                <td>{{rule.id}}</td>
                 <td>{{rule.resource}}</td>
                 <td>
                   <span ng-if="rule.resourceMode == 0">Route ID</span>
@@ -60,6 +66,9 @@
                   <span ng-if="rule.grade == 0">线程数</span>
                 </td>
                 <td>{{rule.count}}</td>
+                <td>
+                    {{rule.interval}} {{rule.intervalUnit == 0 ? '秒' : rule.intervalUnit == 1 ? '分钟' : rule.intervalUnit == 2 ? '小时' : rule.intervalUnit == 3 ? '天' : ''}}
+                </td>
                 <td>
                   <button class="btn btn-xs btn-outline-primary" type="button" ng-click="editRule(rule)" style="font-size: 12px; height:25px;">编辑</button>
                   <button class="btn btn-xs btn-outline-danger" type="button" ng-click="deleteRule(rule)" style="font-size: 12px; height:25px;">删除</button>
